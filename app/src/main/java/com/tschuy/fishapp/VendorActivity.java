@@ -137,8 +137,9 @@ public class VendorActivity extends Activity implements VendorProductListFragmen
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // this screen has no menu
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_vendor, menu);
+        //getMenuInflater().inflate(R.menu.menu_vendor, menu);
         return true;
     }
 
@@ -150,9 +151,9 @@ public class VendorActivity extends Activity implements VendorProductListFragmen
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+         //   return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }

@@ -7,5 +7,6 @@
     <string name="title_activity_vendor">VendorActivity</string>
     <string name="title_activity_product">ProductActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_products_list">ProductsListActivity</string>
 
 </resources>

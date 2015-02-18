@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.tschuy.fishapp.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,12 +29,20 @@
             android:value="AIzaSyCywwStQ_K2YKggPPlhQa1QvikZ8LrLX7I" />
 
         <activity
-            android:name="com.tschuy.fishapp.VendorActivity"
+            android:name=".VendorActivity"
             android:label="@string/title_activity_vendor" >
         </activity>
         <activity
-            android:name="com.tschuy.fishapp.ProductActivity"
+            android:name=".ProductActivity"
             android:label="@string/title_activity_product" >
+        </activity>
+        <activity
+            android:name=".ProductsListActivity"
+            android:label="@string/title_activity_products_list"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tschuy.fishapp.MainActivity" />
         </activity>
     </application>
 

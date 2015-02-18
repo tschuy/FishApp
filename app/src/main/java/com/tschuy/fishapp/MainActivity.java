@@ -103,11 +103,12 @@ public class MainActivity extends Activity
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_example:
-                Toast.makeText(getApplicationContext(), "example", Toast.LENGTH_SHORT).show();
+            case R.id.action_location:
+                Toast.makeText(getApplicationContext(), "location", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.action_settings:
-                Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_SHORT).show();
+            case R.id.action_products:
+                Intent i = new Intent(this, ProductsListActivity.class);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

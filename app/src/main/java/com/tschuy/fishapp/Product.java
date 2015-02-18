@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.koushikdutta.ion.Ion;
 
@@ -85,9 +86,9 @@ public class Product implements Parcelable {
         }
         id = obj.get("id").getAsLong();
 
-        JsonObject image_element = obj.getAsJsonObject("image");
-        if (!image_element.isJsonNull()) {
-            image = "http://seagrant-staging-api.osuosl.org" + image_element.get("link").getAsString();
+        JsonElement image_element = obj.get("image");
+        if (!(image_element instanceof JsonNull)) {
+            image = "http://seagrant-staging-api.osuosl.org" + ((JsonObject) image_element).get("link").getAsString();
         }
         else {
             image = null;
