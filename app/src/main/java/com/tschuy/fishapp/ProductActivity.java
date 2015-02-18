@@ -1,19 +1,29 @@
 package com.tschuy.fishapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-public class ProductActivity extends Activity {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ProductActivity extends Activity implements ProductVendorListFragment.OnFragmentInteractionListener {
 
     Product product;
+    ProductVendorListFragment list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +35,7 @@ public class ProductActivity extends Activity {
         if (product == null) {
             getProduct(getIntent().getLongExtra("product_key", 0));
         } else {
-            loadProduct(product);
+            loadProduct();
         }
     }
 
@@ -36,16 +46,16 @@ public class ProductActivity extends Activity {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
                         product = new Product(result);
-                        loadProduct(product);
+                        loadProduct();
                     }
                 });
     }
 
-    private void loadProduct(Product product) {
+    private void loadProduct() {
         setTitle(product.toString());
         ((TextView) findViewById(R.id.product_description)).setText(product.description);
         if (product.alternate_name != null && !product.alternate_name.equals("")) {
-            ((TextView) findViewById(R.id.alternate_name)).setText("Also known as " + product.alternate_name);
+            ((TextView) findViewById(R.id.alternate_name)).setText("Also known as " + product.alternate_name + ".");
         } else {
             findViewById(R.id.alternate_name).setVisibility(View.INVISIBLE);
         }
@@ -55,12 +65,49 @@ public class ProductActivity extends Activity {
             findViewById(R.id.season).setVisibility(View.INVISIBLE);
             findViewById(R.id.season_title).setVisibility(View.INVISIBLE);
         }
+        if (product.variety != null && !product.variety.equals("")) {
+            ((TextView) findViewById(R.id.variety)).setText(product.variety);
+        } else {
+            findViewById(R.id.variety).setVisibility(View.INVISIBLE);
+            findViewById(R.id.variety_title).setVisibility(View.INVISIBLE);
+        }
         if (product.origin != null && !product.origin.equals("")) {
             ((TextView) findViewById(R.id.origin)).setText(product.origin);
         } else {
             findViewById(R.id.origin).setVisibility(View.INVISIBLE);
             findViewById(R.id.origin_title).setVisibility(View.INVISIBLE);
         }
+        if (product.image != null) {
+            ImageView imageView = (ImageView) findViewById(R.id.product_image);
+            Ion.with(imageView).load(product.image);
+        }
+
+        list = new ProductVendorListFragment();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.contentFrame, list).commit();
+
+        // dirty hack
+        // Should not make this call at the end of the UI code
+        Ion.with(this).load(String.format("http://seagrant-staging-api.osuosl.org/1/vendors/products/%d", product.id))
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        JsonArray vendors_array = result.getAsJsonArray("vendors");
+                        Iterator<JsonElement> vendor_interator = vendors_array.iterator();
+                        while (vendor_interator.hasNext()) {
+                            ProductVendor vendor = new ProductVendor(vendor_interator.next().getAsJsonObject());
+                            product.addVendor(vendor);
+                            list.addItem(vendor);
+                        }
+                    }
+                });
+    }
+
+    public void pvClicked(ProductVendor pv) {
+        Intent i = new Intent(this, VendorActivity.class);
+        i.putExtra("vendor_key", pv.vendor_id);
+        startActivity(i);
     }
 
     @Override
@@ -68,6 +115,12 @@ public class ProductActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_vendor, menu);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteractionPV(ProductVendor pv)
+    {
+        return;
     }
 
     @Override

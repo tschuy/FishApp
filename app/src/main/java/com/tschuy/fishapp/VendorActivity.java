@@ -15,6 +15,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.Iterator;
 import java.util.Locale;
@@ -34,6 +37,27 @@ public class VendorActivity extends Activity implements VendorProductListFragmen
         setContentView(R.layout.activity_vendor);
         Bundle b = getIntent().getExtras();
         vendor = b.getParcelable("com.tschuy.materialtest.Vendor");
+
+        if (vendor == null) {
+            getVendor(getIntent().getLongExtra("vendor_key", 0));
+        } else {
+            loadVendor();
+        }
+    }
+
+    private void getVendor(long vendor_id) {
+        Ion.with(this).load(String.format("http://seagrant-staging-api.osuosl.org/1/vendors/%d", vendor_id))
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        vendor = new Vendor(result);
+                        loadVendor();
+                    }
+                });
+    }
+
+    private void loadVendor() {
 
         list = new VendorProductListFragment();
         getFragmentManager().beginTransaction()

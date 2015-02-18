@@ -9,6 +9,27 @@
 
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/image_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="4dp">
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"/>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/main_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,6 +68,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             card_view:cardCornerRadius="4dp">
 
             <LinearLayout
@@ -73,9 +95,27 @@
                     android:layout_width="wrap_content"
                     android:text="Season"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"/>
+                    android:textSize="24sp"
+                    android:layout_marginBottom="6dp" />
+                />
                 <TextView
                     android:id="@+id/season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="6dp" />
+
+
+                <TextView
+                    android:id="@+id/variety_title"
+                    android:layout_width="wrap_content"
+                    android:text="Variety"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:layout_marginBottom="6dp" />
+                />
+                <TextView
+                    android:id="@+id/variety"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -93,6 +133,42 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:layout_marginBottom="6dp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/vendors_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:showDividers="middle"
+            android:divider="?android:listDivider"
+            android:dividerPadding="2.5dp"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:id="@+id/vendors_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/vendors_label"
+                    android:layout_width="wrap_content"
+                    android:text="Vendors"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"/>
+                <FrameLayout
+                    android:id="@+id/contentFrame"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                </FrameLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
