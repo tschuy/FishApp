@@ -30,19 +30,18 @@
 
         <activity
             android:name=".VendorActivity"
-            android:label="@string/title_activity_vendor" >
+            android:label="@string/title_activity_vendor"
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".ProductActivity"
-            android:label="@string/title_activity_product" >
+            android:label="@string/title_activity_product"
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".ProductsListActivity"
             android:label="@string/title_activity_products_list"
             android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.tschuy.fishapp.MainActivity" />
         </activity>
     </application>
 

@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ import com.koushikdutta.ion.Ion;
 import java.util.Iterator;
 
 
-public class ProductsListActivity extends Activity
+public class ProductsListActivity extends ActionBarActivity
         implements ProductListFragment.OnFragmentInteractionListener {
 
     ProductListFragment list;
@@ -36,7 +37,6 @@ public class ProductsListActivity extends Activity
         setContentView(R.layout.activity_products_list);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
 

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +31,7 @@ import java.util.Iterator;
 import java.util.HashMap;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends ActionBarActivity
         implements VendorListFragment.OnFragmentInteractionListener {
 
     private CharSequence mTitle;

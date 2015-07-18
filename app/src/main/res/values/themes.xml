@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:textColor">@color/text_color_black</item>
+        <item name="@android:colorPrimary">@color/primary</item>
+        <item name="@android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="@android:textColorPrimary">@color/text_color_white</item>
+        <item name="@android:actionMenuTextColor">@color/text_color_black</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <color name="primary">#F44336</color>
+    <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_black">#555555</color>
+    <color name="primary_dark">#D32F2F</color>
+
+</resources>

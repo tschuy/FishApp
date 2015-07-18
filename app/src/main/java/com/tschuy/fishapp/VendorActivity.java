@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -23,7 +25,7 @@ import java.util.Iterator;
 import java.util.Locale;
 
 
-public class VendorActivity extends Activity implements VendorProductListFragment.OnFragmentInteractionListener {
+public class VendorActivity extends ActionBarActivity implements VendorProductListFragment.OnFragmentInteractionListener {
 
     Vendor vendor;
 
@@ -43,6 +45,8 @@ public class VendorActivity extends Activity implements VendorProductListFragmen
         } else {
             loadVendor();
         }
+        // TODO: eww
+        ((ScrollView) findViewById(R.id.scroll_container)).smoothScrollTo(0,0);
     }
 
     private void getVendor(long vendor_id) {
