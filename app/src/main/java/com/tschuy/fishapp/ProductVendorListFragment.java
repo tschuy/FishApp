@@ -95,6 +95,9 @@ public class ProductVendorListFragment extends ListFragment implements AbsListVi
     public void addItem(ProductVendor newProductVendor) {
         mAdapter.add(newProductVendor);
         mAdapter.notifyDataSetChanged();
+        mListView = getListView();
+        // TODO: eww
+        Utils.setListViewHeightBasedOnChildren(mListView);
     }
 
     @Override
